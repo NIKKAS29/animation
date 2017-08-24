@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import com.tigerlee.libs.FasterAnimationsContainer;
 import com.tigerlee.libs.R;
+
+import cn.hacktons.animation.FasterAnimationsContainer;
 
 public class ExampleActivity extends Activity {
 
