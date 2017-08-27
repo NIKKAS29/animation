@@ -18,6 +18,8 @@
 package cn.hacktons.animation;
 
 
+import android.util.Log;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -186,13 +188,18 @@ public class LifoCache<K, V> {
         }
     }
 
-    public V last(int index) {
+    public K lastKey(int index) {
         if (map.size() > 0) {
             try {
-                Object[] keyArray = map.entrySet().toArray();
-                K key = (K) keyArray[keyArray.length - index];
-                return map.get(key);
+                Object[] keyArray = map.keySet().toArray();
+                if (keyArray.length - index >= 0) {
+                    K key = (K) keyArray[keyArray.length - index];
+                    return key;
+                } else {
+                    Log.w("LifoCache", "invalid index");
+                }
             } catch (Exception e) {
+                e.printStackTrace();
                 return null;
             }
         }

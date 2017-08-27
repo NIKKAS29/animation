@@ -1,1 +1,1 @@
-include ':app', ':optanimation'
+include ':sample', ':optanimation'
