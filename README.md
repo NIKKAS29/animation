@@ -12,9 +12,22 @@ MockFrameAnimation is fork from [FasterAnimationsContainer](https://github.com/t
 Since the original project seems no longer maintained actively and there are some issues need to be
 fixed before it can be used. We've send pull request and fixed these issues in MockFrameAnimation.
 
-## Difference between other solutions
+## Other solutions
 
-There are many ways to do animation in different case. We suggest one 
+There are many ways to do frame animation. 
+
+* [Lottie](https://github.com/airbnb/lottie-android) 
+```
+Pretty cool to load animation from json file. If your project has no dependency conflict with 
+Lottie, it's worth to have a try. No images is required any more.
+```
+
+* [AnimationDrawable](https://developer.android.com/reference/android/graphics/drawable/AnimationDrawable.html)
+```
+Usually defaine animaiton with animation-list tag in xml. If your animation images are small or 
+only have few frames, it's OK to use AnimationDrawable.
+```
+
 ## How to use
 
 ```java
