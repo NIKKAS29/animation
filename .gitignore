@@ -3,3 +3,6 @@
 build/
 app/build/
 *.iml
+.DS_Store
+Gemfile.lock
+_site/

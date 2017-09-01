@@ -20,4 +20,14 @@
         android:layout_gravity="center"
         android:src="@drawable/num_0"/>
 
+    <Switch
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="20dp"
+        android:text="Animation"
+        android:textOff="off"
+        android:textOn="on"/>
+
 </FrameLayout>
