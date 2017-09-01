@@ -1,7 +1,3 @@
-# MockFrameAnimation
-
-![logo](sample/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-
 ## What is MockFrameAnimation
 
 MockFrameAnimation can help to avoid OutOfMemoryError when using standard android frame animation.
@@ -11,8 +7,7 @@ many frames causes OutOfMemoryError easily.
 
 This class loads & sets and releases an image on background thread.
 
-MockFrameAnimation is fork from [FasterAnimationsContainer](https://github
-.com/tigerjj/FasterAnimationsContainer);
+MockFrameAnimation is fork from [FasterAnimationsContainer](https://github.com/tigerjj/FasterAnimationsContainer);
 
 Since the original project seems no longer maintained actively and there are some issues need to be
 fixed before it can be used. We've send pull request and fixed these issues in MockFrameAnimation.
