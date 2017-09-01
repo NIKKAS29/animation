@@ -1,12 +1,26 @@
+# MockFrameAnimation
+
 ![logo](sample/src/main/res/mipmap-xxhdpi/ic_launcher.png)
 
-FasterAnimationsContainer
-============================
-FasterAnimationsContainer will help you to avoid from OutOfMemoryError. Android loads all the drawables at once, so animation with many frames causes this error. This class loads & sets and releases an image on background thread.
+## What is MockFrameAnimation
 
-Easy to implement
--------------------
+MockFrameAnimation can help to avoid OutOfMemoryError when using standard android frame animation.
 
+As we known, Android loads all the drawables at once for any frame animations, so animation with 
+many frames causes OutOfMemoryError easily. 
+
+This class loads & sets and releases an image on background thread.
+
+MockFrameAnimation is fork from [FasterAnimationsContainer](https://github
+.com/tigerjj/FasterAnimationsContainer);
+
+Since the original project seems no longer maintained actively and there are some issues need to be
+fixed before it can be used. We've send pull request and fixed these issues in MockFrameAnimation.
+
+## Difference between other solutions
+
+There are many ways to do animation in different case. We suggest one 
+## How to use
 
 ```java
 int ANIMATION_INTERVAL = 120;// 200ms
@@ -30,11 +44,29 @@ int[] IMAGE_RESOURCES = {
 };
 
 ImageView imageView = (ImageView) findViewById(R.id.imageview);
-FasterAnimationsContainer mFasterAnimationsContainer = new FasterAnimationsContainer(IMAGE_RESOURCES.length)
+MockFrameAnimation animation = new MockFrameAnimation(IMAGE_RESOURCES.length)
     .with(IMAGE_RESOURCES, ANIMATION_INTERVAL)
     .into(imageView);
-mFasterAnimationsContainer.start();
+animation.start();
 // stop animation when necessary such as onDestroy
-// mFasterAnimationsContainer.stop();
+// animation.stop();
 
+```
+
+![Animation](device-2017-09-01-182900.gif)
+
+## License
+
+```
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ```
