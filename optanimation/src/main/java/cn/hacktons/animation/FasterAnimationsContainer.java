@@ -189,10 +189,14 @@ public class FasterAnimationsContainer {
 
         private ImageView mImageView;
         private Resources mResource;
+        private int mExpectWidth;
+        private int mExpectHeight;
 
         public GetImageDrawableTask(ImageView imageView) {
             mImageView = imageView;
             mResource = mImageView.getResources();
+            mExpectWidth = mImageView.getWidth();
+            mExpectHeight = mImageView.getHeight();
         }
 
         @SuppressLint("NewApi")
@@ -203,6 +207,7 @@ public class FasterAnimationsContainer {
             options.inMutable = true;
             Bitmap bitmap = sharedCache.get(resId);
             if (bitmap == null) {
+                sampleSize(resId, options);
                 if (sharedCache.size() >= maxCacheSize) {
                     Integer lastKey = sharedCache.lastKey(2);
                     if (lastKey != null) {
@@ -213,10 +218,41 @@ public class FasterAnimationsContainer {
                         sharedCache.remove(lastKey);
                     }
                 }
-                bitmap = BitmapFactory.decodeResource(mResource, resId, options);
-                sharedCache.put(resId, bitmap);
+                try {
+                    bitmap = BitmapFactory.decodeResource(mResource, resId, options);
+                    sharedCache.put(resId, bitmap);
+                } catch (OutOfMemoryError e) {
+                    Log.w("LifoCache", "decode bitmap failed, maybe too large", e);
+                    // not instant gc
+                    evictAllCache();
+                }
             }
             return bitmap;
+        }
+
+        private void sampleSize(int resId, BitmapFactory.Options options) {
+            if (mExpectWidth > 0 && mExpectHeight > 0) {
+                // trigger inSampleSize
+                options.inJustDecodeBounds = true;
+                try {
+                    BitmapFactory.decodeResource(mResource, resId, options);
+                } catch (OutOfMemoryError e) {
+                    Log.w("LifoCache", "decode bitmap failed, maybe too large", e);
+                    // not instant gc
+                    evictAllCache();
+                }
+                int w = options.outWidth;
+                int h = options.outHeight;
+                int inSampleSize = Math.max(w / mExpectWidth, h / mExpectHeight);
+                // reset to normal size
+                if (inSampleSize <= 0) {
+                    inSampleSize = 1;
+                }
+                Log.i("LifoCache", "inSampleSize=" + inSampleSize + ", width=" + mExpectWidth + ", " +
+                    "height=" + mExpectHeight + ", raw width=" + w + ", raw h=" + h);
+                options.inSampleSize = inSampleSize;
+                options.inJustDecodeBounds = false;
+            }
         }
 
         @Override
@@ -226,6 +262,14 @@ public class FasterAnimationsContainer {
                 mImageView.setImageBitmap(result);
             }
         }
+    }
+
+    /**
+     * Clear all cache and notify gc
+     */
+    public void evictAllCache() {
+        sharedCache.evictAll();
+        System.gc();
     }
 
 }

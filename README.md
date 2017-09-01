@@ -1,3 +1,5 @@
+![logo](sample/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+
 FasterAnimationsContainer
 ============================
 FasterAnimationsContainer will help you to avoid from OutOfMemoryError. Android loads all the drawables at once, so animation with many frames causes this error. This class loads & sets and releases an image on background thread.
