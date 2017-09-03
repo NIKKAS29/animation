@@ -1,10 +1,12 @@
-# Mock Frame Animation | [中文](index-zh)
+# Mock Frame Animation
 
 MockFrameAnimation can help to avoid OutOfMemoryError when playing frame animation.
 It loads an image on background thread with global bitmap cache.
 
 As we known, Android loads all the drawables at once for any frame animations, so animation with 
 many frames causes OutOfMemoryError easily. 
+
+For more information [http://hub.hacktons.cn/animation](http://hub.hacktons.cn/animation)
 
 # How to use
 
