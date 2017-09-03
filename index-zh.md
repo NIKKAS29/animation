@@ -3,7 +3,7 @@ layout: default
 title: 帧动画调优
 ---
 
-# 模拟帧动画 | [English](index)
+## 帧动画 | [English](index)
 
 使用 MockFrameAnimation 可以避免在执行帧动画时的内存问题，特别是OutOfMemoryError。他的实现原理在于异步加载图片，
 并且支持全局图片缓存。
@@ -11,7 +11,7 @@ title: 帧动画调优
 我们都知道原生的Android帧动画在加载序列帧时，是一次性将所有序列帧的图片编码到内存当中的，所以执行帧数较多的动画时很容易
 发生内存不足，抛出OutOfMemoryError。
 
-# 使用说明
+## 使用说明
 
 ```java
 int ANIMATION_INTERVAL = 120;// 200ms
@@ -36,7 +36,7 @@ animation.start();
 
 ![Animation](device-2017-09-01-182900.gif)
 
-# 优化点
+## 优化点
 
 综合来看，原生帧动画更适合体量较小，内存压力不那么大的帧动画，如此一次性加载所有帧，可以保证后续帧切换的流程性；
 而MockFrameAnimation则为了解决内存问题，采取动态编码序列帧。这相当于用CPU的编码/计算能力换取了内存消耗；同时为了
@@ -54,7 +54,7 @@ animation.start();
 3. 取消单例模式，支持每个ImageView控制独立的动画；
 4. 新增图片内存缓存；
 
-# 开源协议
+## 开源协议
 
 ```
 Licensed under the Apache License, Version 2.0 (the "License");

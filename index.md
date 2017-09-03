@@ -3,7 +3,7 @@ layout: default
 title: Frame Animation Optimization
 ---
 
-# Mock Frame Animation | [中文](index-zh)
+## Frame Animation | [中文](index-zh)
 
 MockFrameAnimation can help to avoid OutOfMemoryError when playing frame animation.
 It loads an image on background thread with global bitmap cache.
@@ -11,7 +11,7 @@ It loads an image on background thread with global bitmap cache.
 As we known, Android loads all the drawables at once for any frame animations, so animation with 
 many frames causes OutOfMemoryError easily. 
 
-# How to use
+## How to use
 
 ```java
 int ANIMATION_INTERVAL = 120;// 200ms
@@ -36,7 +36,7 @@ animation.start();
 
 ![Animation](device-2017-09-01-182900.gif)
 
-# Optimization
+## Optimization
 The standard android frame animation is more suit for small animations with less images, so it 
 won't lead to OutOfMemoryError while keep the animation fluent; As to MockFrameAnimation, we decode 
 image dynamically and exert as little pressure as possible on system memory. These can increase the
@@ -55,7 +55,7 @@ The mainly changes we've done:
 3. FasterAnimationsContainer is no longer singleton, so each ImageView may control it's animation;
 4. global bitmap cache supported;
 
-# License
+## License
 
 ```
 Licensed under the Apache License, Version 2.0 (the "License");
