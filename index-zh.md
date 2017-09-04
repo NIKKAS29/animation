@@ -13,6 +13,10 @@ title: 帧动画调优
 
 ## 使用说明
 
+```Groovy
+compile 'com.github.avenwu:animation:0.0.1'
+```
+
 ```java
 int ANIMATION_INTERVAL = 120;// 200ms
 int[] IMAGE_RESOURCES = {
