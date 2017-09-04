@@ -10,6 +10,10 @@ For more information [http://hub.hacktons.cn/animation](http://hub.hacktons.cn/a
 
 # How to use
 
+```Groovy
+compile 'com.github.avenwu:animation:0.0.1'
+```
+
 ```java
 int ANIMATION_INTERVAL = 120;// 200ms
 int[] IMAGE_RESOURCES = {

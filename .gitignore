@@ -6,3 +6,4 @@ app/build/
 .DS_Store
 Gemfile.lock
 _site/
+gradle.properties
