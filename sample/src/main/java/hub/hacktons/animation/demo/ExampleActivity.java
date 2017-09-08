@@ -1,21 +1,18 @@
-package com.tigerlee.libs.activity;
+package hub.hacktons.animation.demo;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.tigerlee.libs.R;
-
 import cn.hacktons.animation.MockFrameAnimation;
+import cn.hacktons.animation.demo.R;
 
-/**
- * This activity has the same animations as {@link ExampleActivity} to test the global bitmap
- * cache
- */
-public class AnotherAnimationActivity extends Activity {
+public class ExampleActivity extends AppCompatActivity {
 
     MockFrameAnimation mFasterAnimationsContainer;
     private static final int[] IMAGE_RESOURCES = {
@@ -48,6 +45,13 @@ public class AnotherAnimationActivity extends Activity {
         mFasterAnimationsContainer = new MockFrameAnimation(IMAGE_RESOURCES.length)
             .with(IMAGE_RESOURCES, ANIMATION_INTERVAL)
             .into(imageView);
+        // start another activity with the same animation
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), AnotherAnimationActivity.class));
+            }
+        });
         ((Switch) findViewById(R.id.button)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

@@ -1,0 +1,24 @@
+<resources>
+    <declare-styleable name="MFImageView">
+        <attr name="mf_src" format="reference"/>
+    </declare-styleable>
+
+    <!-- Drawable used to render several animated frames. -->
+    <declare-styleable name="MFAnimationDrawable">
+        <attr name="visible" format="boolean"/>
+        <!-- If true, the animation will only run a single time and then
+             stop.  If false (the default), it will continually run,
+             restarting at the first frame after the last has finished. -->
+        <attr name="oneshot" format="boolean" />
+    </declare-styleable>
+
+    <!-- Represents a single frame inside an AnimationDrawable. -->
+    <declare-styleable name="MFAnimationDrawableItem">
+        <!-- Amount of time (in milliseconds) to display this frame. -->
+        <attr name="duration" format="integer" />
+        <!-- Reference to a drawable resource to use for the frame.  If not
+             given, the drawable must be defined by the first child tag. -->
+        <attr name="drawable" format="reference" />
+    </declare-styleable>
+
+</resources>

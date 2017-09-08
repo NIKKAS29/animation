@@ -5,8 +5,13 @@ import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Log;
 import android.util.SparseArray;
 import android.widget.ImageView;
@@ -26,7 +31,7 @@ import java.util.ArrayList;
  * <li>global bitmap cache supported;</li>
  * </ul>
  */
-public class MockFrameAnimation {
+public class MockFrameAnimation extends Drawable implements Runnable, Drawable.Callback {
     private class AnimationFrame {
         private int mResourceId;
         private int mDuration;
@@ -79,6 +84,54 @@ public class MockFrameAnimation {
     };
     private static int maxCacheSize;
 
+    Drawable mCurrDrawable;
+
+    @Override
+    public void draw(Canvas canvas) {
+
+    }
+
+    @Override
+    public void setAlpha(int alpha) {
+
+    }
+
+    @Override
+    public void setColorFilter(ColorFilter colorFilter) {
+
+    }
+
+    @Override
+    public int getOpacity() {
+        return PixelFormat.OPAQUE;
+    }
+
+    @Override
+    public void invalidateDrawable(Drawable who) {
+        if (who == mCurrDrawable && getCallback() != null) {
+            getCallback().invalidateDrawable(this);
+        }
+    }
+
+    @Override
+    public void scheduleDrawable(Drawable who, Runnable what, long when) {
+        if (who == mCurrDrawable && getCallback() != null) {
+            getCallback().scheduleDrawable(this, what, when);
+        }
+    }
+
+    @Override
+    public void unscheduleDrawable(Drawable who, Runnable what) {
+        if (who == mCurrDrawable && getCallback() != null) {
+            getCallback().unscheduleDrawable(this, what);
+        }
+    }
+
+    @Override
+    public void run() {
+        nextFrame(false);
+    }
+
     public MockFrameAnimation(int maxCachedBitmapCount) {
         init();
         Log.i("LifoCache", "max cache count = " + maxCachedBitmapCount);
@@ -99,6 +152,7 @@ public class MockFrameAnimation {
 
     public MockFrameAnimation into(ImageView imageView) {
         mImageRef = new SoftReference<ImageView>(imageView);
+        setCallback(imageView);
         return this;
     }
 
@@ -140,13 +194,26 @@ public class MockFrameAnimation {
         return mFrames.get(mIndex);
     }
 
+    private void nextFrame(boolean unschedule) {
+        int nextFrame = mIndex + 1;
+        final int numFrames = mFrames.size();
+        boolean oneShot = false;
+        final boolean isLastFrame = oneShot && nextFrame >= (numFrames - 1);
+        // loop
+        if (!oneShot && nextFrame >= numFrames) {
+            nextFrame = 0;
+        }
+        setFrame(nextFrame, unschedule, !isLastFrame);
+    }
+
     /**
      * Starts the animation
      */
     public synchronized void start() {
         mShouldRun = true;
-        mHandler.removeCallbacksAndMessages(null);
-        mHandler.post(mAnimationLoop);
+        if (!mIsRunning) {
+            setFrame(0, false, true);
+        }
     }
 
     /**
@@ -155,6 +222,34 @@ public class MockFrameAnimation {
     public synchronized void stop() {
         mShouldRun = false;
         sharedCache.evictAll();
+        if (mIsRunning) {
+            unscheduleSelf(this);
+        }
+    }
+
+    private void setFrame(int frame, boolean unschedule, boolean animate) {
+        Log.i("Animation", "setFrame:" + frame + ", unschedule:" + unschedule + ", animate:" + animate);
+        if (frame >= mFrames.size()) {
+            return;
+        }
+        mIndex = frame;
+        mShouldRun = animate;
+        selectFrame(frame);
+        if (unschedule || animate) {
+            unscheduleSelf(this);
+        }
+        if (animate) {
+            mIndex = frame;
+            mIsRunning = true;
+            scheduleSelf(this, SystemClock.uptimeMillis() + mFrames.get(frame).getDuration());
+        }
+    }
+
+    private void selectFrame(int idx) {
+        ImageView imageView = mImageRef.get();
+        AnimationFrame frame = mFrames.get(idx);
+        GetImageDrawableTask task = new GetImageDrawableTask(imageView);
+        task.execute(frame.getResourceId());
     }
 
     private Runnable mAnimationLoop = new Runnable() {
