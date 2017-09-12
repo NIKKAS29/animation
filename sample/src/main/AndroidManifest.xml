@@ -1,24 +1,32 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tigerlee.libs"
-    android:versionCode="1"
-    android:versionName="1.0" >
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="cn.hacktons.animation.demo"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          android:versionCode="1"
+          android:versionName="1.0">
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name=".activity.ExampleActivity"
-            android:label="@string/app_name" >
+        android:theme="@style/AppCompact">
+        <activity android:name="hub.hacktons.animation.demo.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AnotherAnimationActivity"
-            android:label="Same animation test cache"/>
+        <activity
+            android:name="hub.hacktons.animation.demo.LazyAnimationActivity"
+            android:label="LazyAnimation">
+        </activity>
+        <activity
+            android:name="hub.hacktons.animation.demo.LazyAnimationXMLActivity"
+            android:label="LazyAnimation XML"/>
+        <activity
+            android:name="hub.hacktons.animation.demo.AnimationXMLActivity"
+            android:label="AnimationDrawable"/>
+
     </application>
 
 </manifest>

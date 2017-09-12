@@ -24,7 +24,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * LifoCache is modified from {@link android.util.LruCache}. Used to cache the recently unused data
+ * A LIFO cache modified from {@link android.util.LruCache}. Used to cache the recently unused data
  * and drop latest recently used data. Can be used for frame animations which loop infinitely.
  */
 public class LifoCache<K, V> {

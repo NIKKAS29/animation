@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MockFrameImageView">
+        <attr name="src" format="reference"/>
+        <attr name="cache_percent" format="float"/>
+        <attr name="cache_size" format="integer"/>
+    </declare-styleable>
+</resources>
