@@ -14,31 +14,79 @@ many frames causes OutOfMemoryError easily.
 ## How to use
 
 ```Groovy
-compile 'com.github.avenwu:animation:0.0.1'
+compile 'com.github.avenwu:animation:0.2.0'
+```
+
+### Use custom ImageView
+
+```xml
+<cn.hacktons.animation.MockFrameImageView
+    android:id="@+id/imageview"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:layout_gravity="center"
+    app:cache_percent="0.4"
+    app:src="@drawable/loading_animation"/>
 ```
 
 ```java
-int ANIMATION_INTERVAL = 120;// 200ms
-int[] IMAGE_RESOURCES = {
+ImageView imageView = (ImageView) findViewById(R.id.imageview);
+animateDrawable = (Animatable) imageView.getDrawable();
+((Switch) findViewById(R.id.button)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            animateDrawable.start();
+        } else {
+            animateDrawable.stop();
+        }
+    }
+});
+```
+
+### Use standard ImageView
+
+```java
+int[] FRAMES = {
     R.drawable.num_0,
     R.drawable.num_1,
     R.drawable.num_2,
-    // ...
+    R.drawable.num_3,
+    R.drawable.num_4,
+    R.drawable.num_5,
+    R.drawable.num_6,
+    R.drawable.num_7,
+    R.drawable.num_8,
+    R.drawable.num_9,
+    R.drawable.num_a,
+    R.drawable.num_b,
+    R.drawable.num_c,
+    R.drawable.num_d,
     R.drawable.num_e,
     R.drawable.num_f,
 };
+animateDrawable = new AnimationBuilder()
+    .frames(FRAMES, 120/*duration*/)
+    .cachePercent(0.4f)
+    .oneShot(false)
+    .into(findViewById(R.id.imageview));
 
-ImageView imageView = (ImageView) findViewById(R.id.imageview);
-MockFrameAnimation animation = new MockFrameAnimation(IMAGE_RESOURCES.length)
-    .with(IMAGE_RESOURCES, ANIMATION_INTERVAL)
-    .into(imageView);
-animation.start();
-// stop animation when necessary such as onDestroy
-// animation.stop();
-
+((Switch) findViewById(R.id.button)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            animateDrawable.start();
+        } else {
+            animateDrawable.stop();
+        }
+    }
+});
 ```
 
-![Animation](device-2017-09-01-182900.gif)
+![Animation](http://7u2jir.com1.z0.glb.clouddn.com/wuba/device-2017-09-12-153056.gif)
+
+[Download Video](http://7u2jir.com1.z0.glb.clouddn.com/wuba/device-2017-09-12-153056.mp4)
+
 
 ## Optimization
 The standard android frame animation is more suit for small animations with less images, so it 
