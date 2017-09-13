@@ -3,13 +3,15 @@ layout: default
 title: Frame Animation Optimization
 ---
 
-## Frame Animation | [中文](index-zh)
+## Lazy FrameAnimation | [中文](index-zh)
 
-MockFrameAnimation can help to avoid OutOfMemoryError when playing frame animation.
+Lazy frameAnimation can help to avoid OutOfMemoryError when playing frame animation.
 It loads an image on background thread with global bitmap cache.
 
 As we known, Android loads all the drawables at once for any frame animations, so animation with 
 many frames causes OutOfMemoryError easily. 
+
+For more detail please refer to this article: [Optimization of Frame Animation on Android](https://www.zybuluo.com/avenwu/note/876161)
 
 ## How to use
 
@@ -17,7 +19,7 @@ many frames causes OutOfMemoryError easily.
 compile 'com.github.avenwu:animation:0.2.0'
 ```
 
-### Use custom ImageView
+### With custom MockFrameImageView
 
 ```xml
 <cn.hacktons.animation.MockFrameImageView
@@ -44,7 +46,7 @@ animateDrawable = (Animatable) imageView.getDrawable();
 });
 ```
 
-### Use standard ImageView
+### Use default ImageView
 
 ```java
 int[] FRAMES = {
@@ -90,7 +92,7 @@ animateDrawable = new AnimationBuilder()
 
 ## Optimization
 The standard android frame animation is more suit for small animations with less images, so it 
-won't lead to OutOfMemoryError while keep the animation fluent; As to MockFrameAnimation, we decode 
+won't lead to OutOfMemoryError while keep the animation fluent; As to lazy frameAnimation, we decode 
 image dynamically and exert as little pressure as possible on system memory. These can increase the
  pressure on CPU, so we allow developer to set the cache size for the new balance between memory and
  CPU. The more we cache, the less we need to decode.
@@ -98,7 +100,7 @@ image dynamically and exert as little pressure as possible on system memory. The
 This project is fork from [FasterAnimationsContainer](https://github.com/tigerjj/FasterAnimationsContainer);
 Since the original project seems no longer maintained actively and there are some issues 
 need to be fixed before it can be used. We've send [Pull Request](https://github.com/tigerjj/FasterAnimationsContainer/issues/11)
- and fixed these issues in MockFrameAnimation.
+ and fixed these issues in [Animation](https://github.com/hacktons/animation).
  
 The mainly changes we've done:
 

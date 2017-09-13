@@ -3,13 +3,15 @@ layout: default
 title: 帧动画调优
 ---
 
-## 帧动画 | [English](index)
+## 懒加载帧动画 | [English](index)
 
-使用 MockFrameAnimation 可以避免在执行帧动画时的内存问题，特别是OutOfMemoryError。他的实现原理在于异步加载图片，
+使用懒加载帧动画可以避免在执行帧动画时的内存问题，特别是OutOfMemoryError。他的实现原理在于异步加载图片，
 并且支持全局图片缓存。
 
 我们都知道原生的Android帧动画在加载序列帧时，是一次性将所有序列帧的图片编码到内存当中的，所以执行帧数较多的动画时很容易
 发生内存不足，抛出OutOfMemoryError。
+
+更多技术细节请参考: [帧动画调优实践](https://www.zybuluo.com/avenwu/note/876161)
 
 ## 使用说明
 
@@ -18,7 +20,7 @@ title: 帧动画调优
 compile 'com.github.avenwu:animation:0.2.0'
 ```
 
-### 结合自定义ImageView使用
+### 结合MockFrameImageView使用
 
 ```xml
 <cn.hacktons.animation.MockFrameImageView
@@ -92,7 +94,7 @@ animateDrawable = new AnimationBuilder()
 ## 优化点
 
 综合来看，原生帧动画更适合体量较小，内存压力不那么大的帧动画，如此一次性加载所有帧，可以保证后续帧切换的流程性；
-而MockFrameAnimation则为了解决内存问题，采取动态编码序列帧。这相当于用CPU的编码/计算能力换取了内存消耗；同时为了
+而懒加载动画则为了解决内存问题，采取动态编码序列帧。这相当于用CPU的编码/计算能力换取了内存消耗；同时为了
 达到适合的平衡，我们允许开发者设置图片缓存的张数，缓存数越大那么内存消耗越多，需要重新编码的次数也就相对更少；
 
 这个项目起源于[FasterAnimationsContainer](https://github.com/tigerjj/FasterAnimationsContainer)；
