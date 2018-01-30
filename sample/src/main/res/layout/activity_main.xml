@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:inputType="textCapWords"
         android:onClick="onClickAnimationDrawable"
-        android:text="Standard AnimationDrawable"/>
+        android:text="Standard"/>
 
     <Button
         android:id="@+id/btn_lazy_code"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:inputType="textCapWords"
         android:onClick="onClickLazyAnimationDrawable"
-        android:text="LazyAnimationDrawable Code"/>
+        android:text="Lottie"/>
 
     <Button
         android:id="@+id/btn_lazy_xml"
@@ -31,5 +31,5 @@
         android:layout_height="wrap_content"
         android:inputType="textCapWords"
         android:onClick="onClickLazyAnimationDrawableXML"
-        android:text="LazyAnimationDrawable XML"/>
+        android:text="Custom"/>
 </LinearLayout>

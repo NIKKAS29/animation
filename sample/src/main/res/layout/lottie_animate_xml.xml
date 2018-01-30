@@ -14,13 +14,15 @@
         android:gravity="center"
         tools:text="Activity Name"/>
 
-    <cn.hacktons.animation.MockFrameImageView
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/imageview"
         android:layout_width="75dp"
         android:layout_height="75dp"
+        android:background="#fff"
         android:layout_gravity="center"
-        app:cache_percent="0.4"
-        app:src="@drawable/jump_animation"/>
+        app:lottie_fileName="data.json"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="false" />
 
     <Switch
         android:id="@+id/button"

@@ -1,32 +1,32 @@
 package hub.hacktons.animation.demo;
 
-import android.graphics.drawable.Animatable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 import cn.hacktons.animation.demo.R;
 
-public class LazyAnimationXMLActivity extends AppCompatActivity {
-    private Animatable animateDrawable;
+public class LottieAnimationActivity extends AppCompatActivity {
+    private LottieAnimationView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lazy_animate_xml);
-        ((TextView) findViewById(R.id.tvActivityName)).setText("手工帧动画");
-        ImageView imageView = (ImageView) findViewById(R.id.imageview);
-        animateDrawable = (Animatable) imageView.getDrawable();
+        setContentView(R.layout.lottie_animate_xml);
+        ((TextView) findViewById(R.id.tvActivityName)).setText("Lottie");
+        imageView = findViewById(R.id.imageview);
+
         ((Switch) findViewById(R.id.button)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    animateDrawable.start();
+                    imageView.playAnimation();
                 } else {
-                    animateDrawable.stop();
+                    imageView.cancelAnimation();
                 }
             }
         });
@@ -35,6 +35,6 @@ public class LazyAnimationXMLActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        animateDrawable.stop();
+        imageView.cancelAnimation();
     }
 }

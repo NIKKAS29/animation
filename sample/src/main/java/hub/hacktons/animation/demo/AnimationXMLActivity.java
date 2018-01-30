@@ -19,8 +19,8 @@ public class AnimationXMLActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.animation_layout);
-        ((TextView) findViewById(R.id.tvActivityName)).setText(getClass().getSimpleName());
-        final ImageView imageView = (ImageView) findViewById(R.id.imageview);
+        ((TextView) findViewById(R.id.tvActivityName)).setText("原生帧动画");
+        final ImageView imageView = findViewById(R.id.imageview);
         animationDrawable = (Animatable) imageView.getDrawable();
         ((Switch) findViewById(R.id.button)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

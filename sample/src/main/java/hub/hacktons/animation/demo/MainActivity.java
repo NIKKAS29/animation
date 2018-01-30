@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickLazyAnimationDrawable(View view) {
-        startActivity(new Intent(this, LazyAnimationActivity.class));
+        startActivity(new Intent(this, LottieAnimationActivity.class));
     }
 
     public void onClickLazyAnimationDrawableXML(View view) {

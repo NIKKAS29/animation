@@ -18,14 +18,17 @@
         </activity>
         <activity
             android:name="hub.hacktons.animation.demo.LazyAnimationActivity"
-            android:label="LazyAnimation">
+            android:label="手工动画">
         </activity>
         <activity
             android:name="hub.hacktons.animation.demo.LazyAnimationXMLActivity"
-            android:label="LazyAnimation XML"/>
+            android:label="手工动画"/>
         <activity
             android:name="hub.hacktons.animation.demo.AnimationXMLActivity"
-            android:label="AnimationDrawable"/>
+            android:label="原生动画"/>
+        <activity
+            android:name="hub.hacktons.animation.demo.LottieAnimationActivity"
+            android:label="Lottie动画"/>
 
     </application>
 
