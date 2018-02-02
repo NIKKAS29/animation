@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="cn.hacktons.animation.demo"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          android:versionCode="1"
-          android:versionName="1.0">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.hacktons.animation.demo"
+    android:versionCode="1"
+    android:versionName="1.0">
 
     <application
         android:allowBackup="true"
@@ -11,25 +11,24 @@
         android:theme="@style/AppCompact">
         <activity android:name="hub.hacktons.animation.demo.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="hub.hacktons.animation.demo.LazyAnimationActivity"
-            android:label="手工动画">
-        </activity>
+            android:label="手工动画"></activity>
         <activity
             android:name="hub.hacktons.animation.demo.LazyAnimationXMLActivity"
-            android:label="手工动画"/>
+            android:label="手工动画" />
         <activity
             android:name="hub.hacktons.animation.demo.AnimationXMLActivity"
-            android:label="原生动画"/>
+            android:label="原生动画" />
         <activity
             android:name="hub.hacktons.animation.demo.LottieAnimationActivity"
-            android:label="Lottie动画"/>
-
+            android:label="Lottie动画" />
+        <activity android:name="hub.hacktons.animation.demo.GifAnimationActivity"></activity>
     </application>
 
 </manifest>

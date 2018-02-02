@@ -26,4 +26,8 @@ public class MainActivity extends AppCompatActivity {
     public void onClickLazyAnimationDrawableXML(View view) {
         startActivity(new Intent(this, LazyAnimationXMLActivity.class));
     }
+
+    public void onClickGifAnimation(View view) {
+        startActivity(new Intent(this, GifAnimationActivity.class));
+    }
 }

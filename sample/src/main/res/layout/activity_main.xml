@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:inputType="textCapWords"
         android:onClick="onClickAnimationDrawable"
-        android:text="Standard"/>
+        android:text="原生帧动画"/>
 
     <Button
         android:id="@+id/btn_lazy_code"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:inputType="textCapWords"
         android:onClick="onClickLazyAnimationDrawable"
-        android:text="Lottie"/>
+        android:text="Lottie动画"/>
 
     <Button
         android:id="@+id/btn_lazy_xml"
@@ -31,5 +31,12 @@
         android:layout_height="wrap_content"
         android:inputType="textCapWords"
         android:onClick="onClickLazyAnimationDrawableXML"
-        android:text="Custom"/>
+        android:text="手工帧动画"/>
+    <Button
+        android:id="@+id/btn_gif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textCapWords"
+        android:onClick="onClickGifAnimation"
+        android:text="Gif动画"/>
 </LinearLayout>
