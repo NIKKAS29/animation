@@ -19,7 +19,7 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_gravity="center"
-        android:src="@drawable/pinjump_00001"/>
+        android:src="@drawable/jump"/>
 
     <Switch
         android:id="@+id/button"
