@@ -49,6 +49,13 @@ public class AnimationBuilder {
     private int cacheSize = 0;
     private boolean oneShot = false;
     private float percent = 0.69f;
+    private AnimateOnCompleteCallback callbackComplete = new AnimateOnCompleteCallback() {
+        @Override
+        public void onComplete() {
+
+        }
+    };
+
 
     /**
      * set animation frames with duration
@@ -100,6 +107,13 @@ public class AnimationBuilder {
         return this;
     }
 
+
+    public AnimationBuilder completeCallback(AnimateOnCompleteCallback callback){
+        this.callbackComplete = callback;
+        return this;
+    }
+
+
     /**
      * set target view
      *
@@ -115,6 +129,7 @@ public class AnimationBuilder {
         animation.setCacheSize(cacheSize);
         animation.setFrames(frames, duration);
         animation.oneShot(oneShot);
+        animation.completeCallback(callbackComplete);
         animation.attachTo(view);
         return animation;
     }

@@ -70,6 +70,8 @@ public class LazyAnimationDrawable extends Drawable implements Runnable, Animata
     private Bitmap mCurBitmap;
     private SoftReference<View> mViewRef;
 
+    private AnimateOnCompleteCallback mAnimateOnCompleteCallback;
+
     private static int maxCacheSize;
     /**
      * strong reference for cache
@@ -255,6 +257,10 @@ public class LazyAnimationDrawable extends Drawable implements Runnable, Animata
         }
     }
 
+    void completeCallback(AnimateOnCompleteCallback callback){
+        mAnimateOnCompleteCallback = callback;
+    }
+
     void oneShot(boolean oneShot) {
         mOneShot = oneShot;
     }
@@ -302,6 +308,7 @@ public class LazyAnimationDrawable extends Drawable implements Runnable, Animata
 
     private void setFrame(int frame, boolean unschedule, boolean animate) {
         if (frame >= mFrames.size()) {
+            mAnimateOnCompleteCallback.onComplete();
             return;
         }
         mCurFrame = frame;
